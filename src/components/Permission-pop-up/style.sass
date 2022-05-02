@@ -1,0 +1,72 @@
+
+.background
+  background: rgba(#6B6A71, 50%)
+  width: 100%
+  height: 100vh
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 9999
+  display: grid
+  align-content: center
+
+.img-box
+  width: 145px
+  height: 145px
+  border-radius: 50%
+  display: grid
+  justify-content: center
+  align-content: center
+  background-color: #6151C3
+  margin: 0 auto 25px
+
+.pop-up-body
+  margin: auto 20px
+  padding: 25px 40px 30px
+  display: grid
+  grid-template-rows: 1fr 1fr auto
+  max-height: 450px
+  height: 100%
+  background: #FFFFFF
+  border-radius: 30px
+
+.text-box
+  text-align: center
+
+  & > .title
+    font-weight: 500
+    font-size: 20px
+    line-height: 24px
+    color: #080713
+    margin: 0 0 25px
+
+  & > .text
+    font-weight: 400
+    font-size: 14px
+    line-height: 17px
+    color: #6B6A71
+    margin: 0
+
+.button-box
+  display: flex
+  justify-content: center
+  flex-direction: column
+
+  & > .allow
+    height: 60px
+    background: #6151C3
+    border-radius: 30px
+    font-weight: 500
+    font-size: 18px
+    line-height: 22px
+    display: grid
+    align-content: center
+    text-align: center
+    color: #FFFFFF
+
+  & > .reject
+    font-size: 12px
+    text-decoration: underline
+    text-align: center
+    margin-top: 15px
+    color: rgba(0,0,0, 0.5)
