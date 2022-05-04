@@ -2,17 +2,17 @@
 import './style.sass'
 import React from "react";
 
-export  default  function WeatherCard(props:any){
-    return(
+export  default  function WeatherCard({data} :any){
+    return (
         <div className="card-body">
             <div className="day-info">
-                <p className="week-day">Wednesday</p>
-                <p className="date">May 04</p>
-                <img className="weather-indicator" alt='thunder' src={'http://openweathermap.org/img/wn/02d@2x.png'}/>
+                <p className="week-day">{new Intl.DateTimeFormat('en-US', { weekday: 'long'}).format(data.dt)}</p>
+                <p className="date">{new Date(data.dt).toLocaleDateString('en-Us', {month: 'long', day: 'numeric'})}</p>
+                <img className="weather-indicator" alt='thunder' src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}/>
             </div>
             <div className="weather-info">
-                <p className="type">Thunder</p>
-                <p className="temperature">20 &#8451;</p>
+                <p className="type">{data.weather[0].main}</p>
+                <p className="temperature">{data.temp} &#8451;</p>
             </div>
         </div>
     )

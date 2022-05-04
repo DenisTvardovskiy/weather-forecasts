@@ -4,7 +4,7 @@ export default function TodayWeather(props: any) {
     return (
         <>
             <h3>Today</h3>
-            <WeatherCard/>
+            <WeatherCard data = {props.todayWeather}/>
         </>
     )
 }

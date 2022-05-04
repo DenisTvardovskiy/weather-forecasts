@@ -1,7 +1,7 @@
 import React from "react";
 import './style.sass';
 
-interface ILocation {
+export interface ILocation {
     city?: string;
     country?: string;
     lat?: string|number;

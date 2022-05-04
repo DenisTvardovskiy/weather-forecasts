@@ -34,7 +34,6 @@ export default function SearchBar(props: any) {
         const res = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${term}&limit=5&appid=${process.env.REACT_APP_ACCESS_KEY}`);
         const quotesArray = await res.json();
         setSearchValue(quotesArray);
-        console.log(searchValue)
     }
 
     const clearResults = () => setSearchValue([]);
