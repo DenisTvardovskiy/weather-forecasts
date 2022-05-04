@@ -1,0 +1,46 @@
+
+.card-body
+  background: #6151C3
+  border-radius: 30px
+  min-height: 145px
+  box-sizing: border-box
+  padding: 15px
+  margin-bottom: 16px
+  & p
+    font-weight: 400
+    font-size: 18px
+    line-height: 22px
+    color: #FFFFFF
+    margin: 0
+
+    &.date
+      font-weight: 500
+      font-size: 28px
+      line-height: 34px
+
+.day-info
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-template-areas: 'week wi' 'date wi'
+
+.week-day
+  grid-area: week
+
+.date
+  grid-area: date
+
+
+.weather-indicator
+  justify-self: end
+  grid-area: wi
+  max-height: 80px
+  height: 100%
+
+.weather-info
+  display: grid
+  grid-template-columns: 1fr 1fr
+  margin-top: 6px
+
+
+.temperature
+  justify-self: end
