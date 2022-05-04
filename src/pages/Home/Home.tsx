@@ -1,18 +1,13 @@
-import WeatherCard from "../../components/Weather-card/Weather-card";
 import './style.sass'
+import FiveDayWeatherCast from "../../components/Five-day-weather-cast/Five-day-weather-cast";
+import TodayWeather from "../../components/Today-weather/Today-weather";
 
 export default function Home(props: any) {
     return (
         <div className="home-body">
-            <h3>Today</h3>
-            <WeatherCard/>
+            <TodayWeather/>
 
-            <h3>Next 5 days</h3>
-            <WeatherCard/>
-            <WeatherCard/>
-            <WeatherCard/>
-            <WeatherCard/>
-            <WeatherCard/>
+            <FiveDayWeatherCast/>
 
         </div>
     )
