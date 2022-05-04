@@ -9,10 +9,9 @@ export default function Home(props: any) {
     const [weather, setWeather] = useState<{current?: any; daily?: any}>({})
 
     const getWeather = async (lat: string|number, lon: string|number) => {
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_ACCESS_KEY}`);
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=minutely,hourly,alerts&appid=${process.env.REACT_APP_ACCESS_KEY}`);
         const quotesArray = await res.json();
         setWeather(quotesArray);
-        console.log(quotesArray)
     }
 
     useEffect(()=>{

@@ -12,7 +12,7 @@ export  default  function WeatherCard({data} :any){
             </div>
             <div className="weather-info">
                 <p className="type">{data.weather[0].main}</p>
-                <p className="temperature">{data.temp} &#8451;</p>
+                <p className="temperature">{typeof data.temp !== "object"? data.temp: data.temp.max} &#8451;</p>
             </div>
         </div>
     )
