@@ -1,0 +1,91 @@
+.weather-info-box
+  width: 240px
+  height: 375px
+  background: #6151C3
+  border-radius: 30px
+  margin: 0 auto
+  display: grid
+  justify-content: center
+  grid-template-rows: 2fr 0fr .5fr 1fr
+  align-content: center
+
+  & > img
+    max-width: 240px
+    max-height: 100px
+    align-self: center
+    justify-self: center
+
+
+@media screen and (max-width: 375px)
+  .weather-info-box
+    width: 200px
+
+.more-info-body
+  padding: 25px 0
+  overflow-x: hidden
+
+.title, .value, .description
+  font-weight: 400
+  text-align: center
+  color: #FFFFFF
+  font-size: 18px
+  line-height: 22px
+  margin: 0
+
+
+.value
+  font-size: 64px
+  line-height: 77px
+
+.metric
+  font-size: 20px
+
+.date-stamp
+  font-size: 30px
+  text-align: center
+
+
+.head
+  padding: 0 25px 25px
+  & > a
+    cursor: pointer
+    text-decoration: none
+    color: #6151C3
+    border: 1px solid #6151C3
+    padding: 5px 10px
+    border-radius: 15px
+    transition: 0.3s
+
+    &:hover
+      color: #ffffff
+      background-color: #6151C3
+
+.hourly-temp
+  list-style: none
+  margin: 0
+  padding: 0 25px
+  display: grid
+
+  @media screen and (min-width: 1050px)
+    grid-template-columns: repeat(3, 1fr)
+    grid-column-gap: 10px
+
+  @media screen and (min-width: 1440px)
+    grid-template-columns: repeat(2, 1fr)
+    grid-column-gap: 10px
+
+  & > li
+    display: grid
+    justify-items: center
+    margin-bottom: 10px
+    grid-template-columns: repeat(4, 1fr)
+    background-color: #6151C3
+    border-radius: 30px
+
+    & > p
+      color: #FFFFFF
+      font-size: 18px
+      line-height: 22px
+
+    & > img
+      max-height: 50px
