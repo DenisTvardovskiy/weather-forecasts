@@ -1,8 +1,9 @@
 import './style.sass'
 import FiveDayWeatherCast from "../../components/Five-day-weather-cast/Five-day-weather-cast";
 import TodayWeather from "../../components/Today-weather/Today-weather";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {ILocation} from "../../components/Permission-pop-up/Permission-pop-up";
+import Header from "../../components/Header/Header";
 
 export default function Home(props: any) {
 
@@ -34,6 +35,7 @@ export default function Home(props: any) {
 
     return sortedData.length?(
         <div className="home-body">
+            <Header/>
             <TodayWeather todayWeather={sortedData[0]}/>
 
             <FiveDayWeatherCast weekWeather={sortedData}/>
