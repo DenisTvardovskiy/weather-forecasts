@@ -46,7 +46,7 @@ export default function SearchBar(props: any) {
             {!isOpenSearch ? <h2>{selectedCity?.city}, {selectedCity?.country}</h2> : null}
             {!isOpenSearch ?
                 <div onClick={toggleSearch} className="open-search">
-                    <img className={"search-icon"} src="./assets/search.png" alt={"search"}/>
+                    <img className={"search-icon"} src="/assets/search.png" alt={"search"}/>
                 </div> : null}
             {isOpenSearch ?
                 <div className="search-bar">
@@ -63,7 +63,7 @@ export default function SearchBar(props: any) {
                             })}
                         </ul>
                         : null}
-                    <img onClick={toggleSearch} className="close" src="./assets/close.png" alt="close"/>
+                    <img onClick={toggleSearch} className="close" src="/assets/close.png" alt="close"/>
                 </div>
                 : null}
         </div>
