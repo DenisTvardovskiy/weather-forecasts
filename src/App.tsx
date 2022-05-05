@@ -21,8 +21,8 @@ function App() {
         </div>
         {!showPermission?
         <Routes>
-            <Route path="" element={<Home />} />
-            <Route path="/more-info" element={<MoreInfo />} />
+            <Route path="/weather-forecasts/" element={<Home />} />
+            <Route path="/weather-forecasts/more-info" element={<MoreInfo />} />
         </Routes>:null}
       {showPermission?<PermissionPopUp showPermission={showPermission} setShowPermission={setShowPermission}/>:null}
     </div>
