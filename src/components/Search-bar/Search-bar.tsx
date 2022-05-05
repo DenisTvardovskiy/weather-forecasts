@@ -59,7 +59,7 @@ export default function SearchBar(props: any) {
                     {searchValue.length ?
                         <ul className='city-select'>
                             {searchValue.map((item: any) => {
-                                return (<CitySelectField setFoundData={props.setFoundData} setSearchValue={setSearchValue} setSelectedCity={setSelectedCity} item={item}/>)
+                                return (<CitySelectField setIsLoading={props.setIsLoading} setFoundData={props.setFoundData} setSearchValue={setSearchValue} setSelectedCity={setSelectedCity} item={item}/>)
                             })}
                         </ul>
                         : null}
@@ -85,6 +85,7 @@ function CitySelectField (props:any){
         props.setSelectedCity(data)
         props.setFoundData(data)
         props.setSearchValue([])
+        props.setIsLoading(true)
     }
 
     return (
