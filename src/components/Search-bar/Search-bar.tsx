@@ -59,7 +59,7 @@ export default function SearchBar(props: any) {
                     {searchValue.length ?
                         <ul className='city-select'>
                             {searchValue.map((item: any) => {
-                                return (<CitySelectField setSearchValue={setSearchValue} setSelectedCity={setSelectedCity} item={item}/>)
+                                return (<CitySelectField setFoundData={props.setFoundData} setSearchValue={setSearchValue} setSelectedCity={setSelectedCity} item={item}/>)
                             })}
                         </ul>
                         : null}
@@ -83,6 +83,7 @@ function CitySelectField (props:any){
     const selectCity = (data:any) => {
         localStorage.setItem("location", JSON.stringify(data))
         props.setSelectedCity(data)
+        props.setFoundData(data)
         props.setSearchValue([])
     }
 

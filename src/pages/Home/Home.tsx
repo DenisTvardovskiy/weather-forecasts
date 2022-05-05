@@ -9,6 +9,7 @@ import { getWeather } from '../../services/weather.service';
 export default function Home(props: any) {
 
     const [sortedData, setSortedData] = useState([])
+    const [foundData, setFoundData] = useState<ILocation>({})
 
     const filterWeatherByDay = (array: any, day: number)=> {
         return array.filter((item:any)=>{
@@ -24,24 +25,28 @@ export default function Home(props: any) {
 
     useEffect(()=>{
         const cityData: ILocation = JSON.parse(localStorage.getItem('location')as string) as ILocation
-        if(cityData && cityData.lat && cityData.lon) {
-            getWeather(cityData.lat, cityData.lon).then((res)=>{
-                const dayArray = getDayArray(res.list)
-
-                const filteredDataDayByDay:any = dayArray.map((day: any)=>{
-                    return filterWeatherByDay(res.list, day)
-                })
-
-                setSortedData(filteredDataDayByDay)
-                }
-            )
-        }
+        setFoundData(cityData)
 
     }, [])
 
+    useEffect(()=>{
+        if(foundData && foundData.lat && foundData.lon) {
+            getWeather(foundData.lat, foundData.lon).then((res)=>{
+                    const dayArray = getDayArray(res.list)
+
+                    const filteredDataDayByDay:any = dayArray.map((day: any)=>{
+                        return filterWeatherByDay(res.list, day)
+                    })
+
+                    setSortedData(filteredDataDayByDay)
+                }
+            )
+        }
+    }, [foundData])
+
     return sortedData.length?(
         <div className="home-body">
-            <Header/>
+            <Header setFoundData={setFoundData}/>
             <TodayWeather todayWeather={sortedData[0]}/>
 
             <FiveDayWeatherCast weekWeather={sortedData}/>
