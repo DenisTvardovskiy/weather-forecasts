@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import './App.scss';
 import Home from './pages/Home/Home';
 import MoreInfo from "./pages/More-info/More-info";
-import Header from "./components/Header/Header";
 import PermissionPopUp from './components/Permission-pop-up/Permission-pop-up';
 
 function App() {
@@ -21,8 +20,8 @@ function App() {
         </div>
         {!showPermission?
         <Routes>
-            <Route path="/weather-forecasts/" element={<Home />} />
-            <Route path="/weather-forecasts/more-info" element={<MoreInfo />} />
+            <Route path="" element={<Home />} />
+            <Route path="/more-info" element={<MoreInfo />} />
         </Routes>:null}
       {showPermission?<PermissionPopUp showPermission={showPermission} setShowPermission={setShowPermission}/>:null}
     </div>

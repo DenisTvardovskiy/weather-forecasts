@@ -14,7 +14,7 @@ export  default  function WeatherCard({data} :any){
         <Link
             className={"link"}
             to={{
-                pathname: "/weather-forecasts/more-info",
+                pathname: "/more-info",
                 search: `?lat=${location.lat}&lon=${location.lon}&dt=${new Date(data.dt_txt).getDate()}`
             }}
             >

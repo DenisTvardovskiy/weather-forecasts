@@ -51,7 +51,7 @@ export default function MoreInfo(props: any) {
     return sortedData.length ? (
         <div className={"more-info-body"}>
             <section className={"head"}>
-                <Link to={"/weather-forecasts/"}>Go back home</Link>
+                <Link to={"/"}>Go back home</Link>
             </section>
             {!isLoading ? <>
                     <div>
