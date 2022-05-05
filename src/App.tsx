@@ -16,7 +16,9 @@ function App() {
 
   return (
     <div className="App">
-
+        <div className={"left-side"}>
+            <img alt={'lake'} src={"/assets/desk-bg.jpg"}/>
+        </div>
         {!showPermission?
         <Routes>
             <Route path="" element={<Home />} />

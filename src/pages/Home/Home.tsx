@@ -51,15 +51,18 @@ export default function Home(props: any) {
     return sortedData.length ? (
         <div className="home-body">
 
-            <Header setFoundData={setFoundData} setIsLoading={setIsLoading}/>
-            {!isLoading ? <>
-                    <TodayWeather todayWeather={sortedData[0]}/>
 
-                    <FiveDayWeatherCast weekWeather={sortedData}/>
-                </> :
-                <div className={"loader-box"}>
-                    <Loader/>
-                </div>}
+                <Header setFoundData={setFoundData} setIsLoading={setIsLoading}/>
+                {!isLoading ? <>
+                        <TodayWeather todayWeather={sortedData[0]}/>
+
+                        <FiveDayWeatherCast weekWeather={sortedData}/>
+                    </> :
+                    <div className={"loader-box"}>
+                        <Loader/>
+                    </div>}
+
+
         </div>
     ) : null
 }
