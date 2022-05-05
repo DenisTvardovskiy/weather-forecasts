@@ -1,5 +1,6 @@
 import './style.sass'
 import {useEffect, useState} from "react";
+import {getCityCord} from "../../services/weather.service";
 
 
 export default function SearchBar(props: any) {
@@ -31,9 +32,11 @@ export default function SearchBar(props: any) {
     const toggleSearch = () => setIsOpenSearch(!isOpenSearch)
 
     const onSearchSubmit = async (term: any) => {
-        const res = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${term}&limit=5&appid=${process.env.REACT_APP_ACCESS_KEY}`);
-        const quotesArray = await res.json();
-        setSearchValue(quotesArray);
+        getCityCord(term).then((res)=>{
+            setSearchValue(res);
+            }
+        )
+
     }
 
     const clearResults = () => setSearchValue([]);
@@ -56,7 +59,7 @@ export default function SearchBar(props: any) {
                     {searchValue.length ?
                         <ul className='city-select'>
                             {searchValue.map((item: any) => {
-                                return (<CitySelectField setSelectedCity={setSelectedCity} item={item}/>)
+                                return (<CitySelectField setSearchValue={setSearchValue} setSelectedCity={setSelectedCity} item={item}/>)
                             })}
                         </ul>
                         : null}
@@ -80,6 +83,7 @@ function CitySelectField (props:any){
     const selectCity = (data:any) => {
         localStorage.setItem("location", JSON.stringify(data))
         props.setSelectedCity(data)
+        props.setSearchValue([])
     }
 
     return (

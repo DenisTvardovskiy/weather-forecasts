@@ -4,31 +4,37 @@ import TodayWeather from "../../components/Today-weather/Today-weather";
 import React, {useEffect, useState} from "react";
 import {ILocation} from "../../components/Permission-pop-up/Permission-pop-up";
 import Header from "../../components/Header/Header";
+import { getWeather } from '../../services/weather.service';
 
 export default function Home(props: any) {
 
     const [sortedData, setSortedData] = useState([])
 
-    const getWeather = async (lat: string|number, lon: string|number) => {
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_ACCESS_KEY}`);
-        const quotesArray = await res.json();
-        const dayArray = Array.from(new Set(quotesArray.list.map((item: any) => {
-            return   new Date(item.dt_txt).getDate()
-        })))
-
-        const filteredDataDayByDay:any = dayArray.map((day)=>{
-            return  quotesArray.list.filter((item:any)=>{
-                return new Date(item.dt_txt).getDate() === day
-            })
+    const filterWeatherByDay = (array: any, day: number)=> {
+        return array.filter((item:any)=>{
+            return new Date(item.dt_txt).getDate() === day
         })
+    }
 
-        setSortedData(filteredDataDayByDay)
+    const getDayArray = (arr: any) => {
+       return  Array.from(new Set(arr.map((item: any) => {
+            return new Date(item.dt_txt).getDate()
+        })))
     }
 
     useEffect(()=>{
         const cityData: ILocation = JSON.parse(localStorage.getItem('location')as string) as ILocation
         if(cityData && cityData.lat && cityData.lon) {
-            getWeather(cityData.lat, cityData.lon)
+            getWeather(cityData.lat, cityData.lon).then((res)=>{
+                const dayArray = getDayArray(res.list)
+
+                const filteredDataDayByDay:any = dayArray.map((day: any)=>{
+                    return filterWeatherByDay(res.list, day)
+                })
+
+                setSortedData(filteredDataDayByDay)
+                }
+            )
         }
 
     }, [])

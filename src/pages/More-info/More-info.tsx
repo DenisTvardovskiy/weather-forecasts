@@ -3,6 +3,7 @@ import './style.sass'
 import Slider from "react-slick";
 import React, {useEffect, useState} from "react";
 import queryString from 'query-string'
+import {getWeather} from "../../services/weather.service";
 
 export default function MoreInfo(props:any) {
     const settings = {
@@ -19,26 +20,19 @@ export default function MoreInfo(props:any) {
     const [currentData, setCurrentData] = useState<any>({})
     const [cityName, setCityName] = useState('N/a')
 
-    const getWeather = async (lat: string|number, lon: string|number) => {
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_ACCESS_KEY}`);
-        const quotesArray = await res.json();
-        const filteredDataDayByDay = quotesArray.list.filter((item:any)=> {
-            if(value.dt){
-                return new Date(item.dt_txt).getDate() === +value?.dt
-            }
-        })
-
-
-        setCityName(quotesArray.city.name)
-
-        setSortedData(filteredDataDayByDay)
-        setCurrentData(filteredDataDayByDay[0])
-    }
-
     useEffect(()=>{
         if(value && value.lat && value.lon) {
-            getWeather((value.lat as string),(value.lon as string))
+            getWeather((value.lat as string),(value.lon as string)).then((res:any)=>{
+                const filteredDataDayByDay = res.list.filter((item:any)=> {
+                            if(value.dt){
+                                return new Date(item.dt_txt).getDate() === +value?.dt
+                            }
+                        })
 
+                        setCityName(res.city.name)
+                        setSortedData(filteredDataDayByDay)
+                        setCurrentData(filteredDataDayByDay[0])
+            })
         }
 
     }, [])
@@ -59,7 +53,7 @@ export default function MoreInfo(props:any) {
                 <Slider {...settings}>
                     <div className={" slide-box"}>
                         <div className={"temp weather-info-box"}>
-                            <img  alt='thunder' src={`http://openweathermap.org/img/wn/02d@2x.png`} className={"temp-icon"}/>
+                            <img  alt='thunder' src={`http://openweathermap.org/img/wn/${currentData?.weather[0]?.icon}@2x.png`} className={"temp-icon"}/>
 
                             <p className={"title"}>{cityName}</p>
                             <p className={"value"}>{Math.round(currentData.main?.temp)} &#8451;</p>
@@ -91,18 +85,19 @@ export default function MoreInfo(props:any) {
                 <h3 className={"date-stamp"}>March 30</h3>
             </div>
             <ul className={"hourly-temp"}>
-                {sortedData.map((item:any)=>{
-                    return(
-                        <li>
-                            <p><strong>{new Date(item.dt_txt).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: 'numeric' })}</strong></p>
-                            <p>{item.weather[0].main}</p>
-                            <img  alt='thunder' src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} className={"temp-icon"}/>
-                            <p><strong>{item.main.temp}</strong> &#8451;</p>
-                        </li>
-                    )
-                })}
-
+                {sortedData.map((item:any)=> <HourWeatherItem item={item}/>)}
             </ul>
         </div>
     ) : null
+}
+
+const HourWeatherItem = ({item}: any) =>{
+    return (
+        <li>
+            <p><strong>{new Date(item.dt_txt).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: 'numeric' })}</strong></p>
+            <p>{item.weather[0].main}</p>
+            <img  alt='thunder' src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} className={"temp-icon"}/>
+            <p><strong>{item.main.temp}</strong> &#8451;</p>
+        </li>
+    )
 }
